@@ -40,8 +40,18 @@ INSTALLED_APPS = [
     'posts.apps.PostsConfig',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_auth'
+    'dj_rest_auth', 
+    'django.contrib.sites', 
+    'allauth', 
+    'allauth.account', 
+    'allauth.socialaccount', 
+    'rest_auth.registration', 
+    'rest_framework_swagger', #new
 ]
+
+EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend' 
+
+SITE_ID= 1 
 
 REST_FRAMEWORK={
     'DEFAULT_PERMISSION_CLASSES':[
@@ -51,6 +61,7 @@ REST_FRAMEWORK={
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication'
     ],
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' #new
 }
 
 MIDDLEWARE = [
@@ -135,3 +146,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SWAGGER_SETTINGS={
+    'LOGIN_URL':'rest_framework:login', #new
+    'LOGOUT_URL':'rest_framework:logout', #new
+}
